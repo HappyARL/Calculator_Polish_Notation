@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 SET(CMAKE_INSTALL_RPATH "${PROJECT_SOURCE_DIR}/bin")
-SET(TASK_NAME calculator_cpp_yaishenka)
+SET(TASK_NAME calculator)
 
 add_compile_options(-pedantic -Werror -Wextra -fsanitize=address -fsanitize=undefined -std=c++20)
 
