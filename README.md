@@ -80,19 +80,19 @@ AbstractToken
 - OperandToken: AbstractToken
   Этот шаблонный класс представляет токен операнда. Нужно поддержать следующие методы:
 
-  OperandToken(const std::string&)
-  OperandToken(const T& value)
-  const T& GetValue()
+  1) OperandToken(const std::string&)
+  2) OperandToken(const T& value)
+  3) const T& GetValue()
 
 Note Предполагаем что ваш калькулятор будет использовать только такие типы T, которые умеют вводиться из потока. Подсказка: используйте std:stringstream
 
 - OperatorToken<T value, bool IsBinary>
   Этот класс представляет токен оператора. Нужно поддержать следующие методы:
 
-  OperatorToken(const std::string&)
-  bool IsBinary() - является ли оператор бинарным
-  Calculate(Operand* lhs, Operand* rhs) - применяет оператор к двум операндам. Не должен компилироваться если вызывается от не бинарного оператора!     (static_assert или как хотите)
-  Calculate(Operand* operand) - применяет унарный оператор к операнду. Не должен компилироваться если вызывается от бинарного оператора (static_assert или как хотите)
+  1) OperatorToken(const std::string&)
+  2) bool IsBinary() - является ли оператор бинарным
+  3) Calculate(Operand* lhs, Operand* rhs) - применяет оператор к двум операндам. Не должен компилироваться если вызывается от не бинарного оператора!     (static_assert или как хотите)
+  4) Calculate(Operand* operand) - применяет унарный оператор к операнду. Не должен компилироваться если вызывается от бинарного оператора (static_assert или как хотите)
 
 Подсказка по реализации. По сути есть два пути (путь с кучей ифов мы отметаем):
 
@@ -105,8 +105,8 @@ Note Предполагаем что ваш калькулятор будет и
   Нужно реализовать класс ExprInPolishNotation. Этот класс должен конструироваться от строки и парсить выражение на токены.
   Необходимо поддержать следующие методы:
 
-  ExprInPolishNotation(const std::string&) - парсит выражение и превращает его в вектор токенов
-  const std::vector<AbstractToken*>& GetTokens() - возвращает вектор токенов (польская нотация)
+  1) ExprInPolishNotation(const std::string&) - парсит выражение и превращает его в вектор токенов
+  2) const std::vector<AbstractToken*>& GetTokens() - возвращает вектор токенов (польская нотация)
 
 
 - Calculator
