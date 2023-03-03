@@ -4,14 +4,14 @@
 #include "AbstractToken.hpp"
 #include "OperandToken.hpp"
 
-template <typename T>
+template <typename T, bool Binary>
 class OperatorToken : public AbstractToken {
  private:
   bool binary_;
 
  public:
-  OperatorToken(const std::string& str, bool binary) : AbstractToken(str) {
-    binary_ = binary;
+  OperatorToken(const std::string& str) : AbstractToken(str) {
+    binary_ = Binary;
   }
 
   ~OperatorToken() = default;
