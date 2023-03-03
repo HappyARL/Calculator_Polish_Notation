@@ -3,12 +3,11 @@
 #include "OperandToken.hpp"
 #include "OperatorToken.hpp"
 
-template <typename T>
-class OperatorMINUS : public OperatorToken<T> {
+template <typename T, bool Binary>
+class OperatorMINUS : public OperatorToken<T, Binary> {
  private:
  public:
-  OperatorMINUS(const std::string& str, bool binary)
-      : OperatorToken<T>(str, binary) {}
+  OperatorMINUS(const std::string& str) : OperatorToken<T, Binary>(str) {}
 
   OperandToken<T>* Calculate(OperandToken<T>* lhs,
                              OperandToken<T>* rhs) override {
@@ -19,6 +18,9 @@ class OperatorMINUS : public OperatorToken<T> {
   }
 
   OperandToken<T>* Calculate(OperandToken<T>* operand) override {
-    return operand;
+    T niga_operand = operand->GetValue();
+    niga_operand = -niga_operand;
+    OperandToken<T>* result = new OperandToken<T>(niga_operand);
+    return result;
   }
 };
