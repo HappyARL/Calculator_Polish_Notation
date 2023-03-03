@@ -3,12 +3,11 @@
 #include "OperandToken.hpp"
 #include "OperatorToken.hpp"
 
-template <typename T>
-class OperatorSUB : public OperatorToken<T> {
+template <typename T, bool Binary>
+class OperatorSUB : public OperatorToken<T, Binary> {
  private:
  public:
-  OperatorSUB(const std::string& str, bool binary)
-      : OperatorToken<T>(str, binary) {}
+  OperatorSUB(const std::string& str) : OperatorToken<T, Binary>(str) {}
 
   OperandToken<T>* Calculate(OperandToken<T>* lhs,
                              OperandToken<T>* rhs) override {
