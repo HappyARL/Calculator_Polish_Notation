@@ -3,12 +3,11 @@
 #include "OperandToken.hpp"
 #include "OperatorToken.hpp"
 
-template <typename T>
-class OperatorMUL : public OperatorToken<T> {
+template <typename T, bool Binary>
+class OperatorMUL : public OperatorToken<T, Binary> {
  private:
  public:
-  OperatorMUL(const std::string& str, bool binary)
-      : OperatorToken<T>(str, binary) {}
+  OperatorMUL(const std::string& str) : OperatorToken<T, Binary>(str) {}
 
   OperandToken<T>* Calculate(OperandToken<T>* lhs,
                              OperandToken<T>* rhs) override {
