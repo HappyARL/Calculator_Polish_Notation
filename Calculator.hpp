@@ -8,13 +8,12 @@ class Calculator {
  private:
  public:
   static T CalculateExpr(const std::string& expr) {
-    enum Index { Operand = 1, Bracket, Operator };
+    enum Index { Operand = 1, Bracket, BINOperator, UNAROperator };
     ExprInPolishNotation<T> exprln_polish = ExprInPolishNotation<T>(expr);
     std::vector<std::pair<AbstractToken*, int> > polish_expr =
         exprln_polish.GetTokens();
-    size_t length = polish_expr.size();
     std::stack<OperandToken<T>*> stack;
-    for (size_t i = 0; i < length; ++i) {
+    for (size_t i = 0; i < polish_expr.size(); ++i) {
       int index = polish_expr[i].second;
       if (index == Operand) {
         OperandToken<T>* cur_operand =
@@ -22,32 +21,38 @@ class Calculator {
         stack.push(cur_operand);
         continue;
       }
-      if (index == Operator) {
-        OperatorToken<T>* cur_oper =
-            static_cast<OperatorToken<T>*>(polish_expr[i].first);
+      if (index == BINOperator) {
+        OperatorToken<T, true>* curr_operator =
+            static_cast<OperatorToken<T, true>*>(polish_expr[i].first);
         if (static_cast<bool>(stack.empty())) {
           return -1;
         }
-        if (cur_oper->IsBinary()) {
-          OperandToken<T>* left = stack.top();
-          stack.pop();
-          if (static_cast<bool>(stack.empty())) {
-            return -1;
-          }
-          OperandToken<T>* right = stack.top();
-          stack.pop();
-          OperandToken<T>* result = cur_oper->Calculate(left, right);
-          delete left;
-          delete right;
-          stack.push(result);
-        } else {
-          OperandToken<T>* value = stack.top();
-          stack.pop();
-          OperandToken<T>* result = cur_oper->Calculate(value);
-          delete value;
-          stack.push(result);
+        OperandToken<T>* left = stack.top();
+        stack.pop();
+        if (static_cast<bool>(stack.empty())) {
+          return -1;
         }
-        delete cur_oper;
+        OperandToken<T>* right = stack.top();
+        stack.pop();
+        OperandToken<T>* result = curr_operator->Calculate(left, right);
+        delete left;
+        delete right;
+        stack.push(result);
+        delete curr_operator;
+        continue;
+      }
+      if (index == UNAROperator) {
+        OperatorToken<T, false>* curr_operator =
+            static_cast<OperatorToken<T, false>*>(polish_expr[i].first);
+        if (static_cast<bool>(stack.empty())) {
+          return -1;
+        }
+        OperandToken<T>* value = stack.top();
+        stack.pop();
+        OperandToken<T>* result = curr_operator->Calculate(value);
+        delete value;
+        stack.push(result);
+        delete curr_operator;
         continue;
       }
     }
