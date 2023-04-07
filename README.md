@@ -2,8 +2,9 @@
 
 ---
 
-Данный калькулятор переводит обычную запись в польскую (точнее в обратную / Postfix notation("Reverse Polish")) и вывод значение вырожения. 
-Использовался Алгоритм сортировочной станции - https://en.wikipedia.org/wiki/Shunting_yard_algorithm
+Данный калькулятор переводит обычную запись в польскую (точнее в обратную / Postfix notation("Reverse Polish")) и вывод значение выражения.
+
+Использовался Алгоритм сортировочной станции (Shunting yard algorithm) - https://en.wikipedia.org/wiki/Shunting_yard_algorithm
 
 Original task by yaishenka.
 
