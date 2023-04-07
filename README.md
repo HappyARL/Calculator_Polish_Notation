@@ -1,4 +1,4 @@
-# Calculator_Polish-Notation
+# Калькулятор Польской Нотации (Calculator_Polish_Notation)
 
 ---
 
@@ -6,6 +6,7 @@
 Использовался Алгоритм сортировочной станции - https://en.wikipedia.org/wiki/Shunting_yard_algorithm
 
 Original task by yaishenka.
+
                           ВНИМАНИЕ:
 ! Автор для упрощения жизни не везде следовал условиям задачи !
 ---
